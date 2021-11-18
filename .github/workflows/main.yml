@@ -34,7 +34,7 @@ jobs:
       
       - run: go build
       
-      - run: go test -v -gcflags=-l ./...
+      - run: go test -v
       
       # - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
 
