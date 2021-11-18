@@ -30,11 +30,13 @@ jobs:
       
       - run: yarn test:unit
         
-      - run: go  get -v -t -u
+      - run: go get -v -t -u
       
       - run: go build
 
       - run: go test -v
       
-      # - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
+      - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
+
+      - run: docker run testgithubaction
 
