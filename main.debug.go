@@ -4,6 +4,7 @@
 package main
 
 import (
+	"log"
 	router "test-githubaction/router"
 
 	"github.com/gofiber/fiber/v2"
@@ -15,6 +16,8 @@ func httpListen() {
 	application := fiber.New()
 	router.SetupRoutes(application)
 
-	// 監聽 3000 Port
+	log.Println("debug here!")
+
+	// 監聽 3001 Port
 	_ = application.Listen("127.0.0.1:3001")
 }
