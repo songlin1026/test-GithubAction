@@ -34,9 +34,11 @@ jobs:
       
       - run: go build
 
-      - run: sleep 15s
+      - run: sleep 5s
       
-      - run: go test -v
+      - run: |
+             curl http://localhost:3001 &&
+             go test -v
       
       # - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
 
