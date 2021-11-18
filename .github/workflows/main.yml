@@ -33,6 +33,8 @@ jobs:
       - run: go  get -v -t -u
       
       - run: go build
+
+      - run: sleep 15s
       
       - run: go test -v
       
