@@ -20,4 +20,6 @@ func httpListen() {
 
 	// 監聽 3001 Port
 	_ = application.Listen("127.0.0.1:3001")
+
+	log.Println("debug here2!")
 }
