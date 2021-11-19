@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -21,11 +21,11 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:      
+    steps:
       - uses: actions/checkout@v2
 
       - uses: actions/cache@v2
-        id: yarn-cache 
+        id: yarn-cache
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
@@ -34,7 +34,7 @@ jobs:
 
       - uses: actions/cache@v2
         id: go-cache
-        with:        
+        with:
           path: |
             ~/.cache/go-build
             ~/go/pkg/mod
@@ -44,31 +44,28 @@ jobs:
 
       - if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
-      
+
       - run: yarn build
-      
+
       - run: yarn test:unit
-        
+
       - if: steps.go-cache.outputs.cache-hit != 'true'
         run: go get -v -t -u
-      
+
       - run: go build
 
       - run: go test -v
 
+      - run: ./test-githubaction&
 
-      # - run: ./test-githubaction&
+      - run: yarn cypress run -e host=http://127.0.0.1:3001 --config video=false
 
-      # - run: yarn cypress run -e host=http://127.0.0.1:3001 --config video=false
-      
-      # - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
+      - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
 
-      # - run: docker save testgithubaction:latest -o testgithubaction.tar 
-      
-      # - run: gzip testgithubaction.tar
+      - run: docker save testgithubaction:latest -o testgithubaction.tar
 
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     path: testgithubaction.tar.gz
+      - run: gzip testgithubaction.tar
 
-
+      - uses: actions/upload-artifact@v2
+        with:
+          path: testgithubaction.tar.gz
