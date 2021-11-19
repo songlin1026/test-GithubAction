@@ -38,5 +38,11 @@ jobs:
       
       - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
 
-      - run: docker run testgithubaction
+      - run: docker save testgithubaction:latest > testgithubaction.tar.gz
+
+      - uses: actions/upload-artifact@v2
+          with:
+            path: testgithubaction.tar.gz
+
+      # - run: yarn cypress run -e host=http://127.0.0.1:3001 --config video=false
 
