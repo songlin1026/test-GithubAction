@@ -26,3 +26,4 @@ pnpm-debug.log*
 *.sw?
 test-githubaction.exe
 test-githubaction
+testgithubaction.tar.gz
