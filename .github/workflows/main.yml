@@ -31,6 +31,16 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
+
+      - uses: actions/cache@v2
+          with:
+          id: go-cache
+            path: |
+              ~/.cache/go-build
+              ~/go/pkg/mod
+            key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+            restore-keys: |
+              ${{ runner.os }}-go-
         
       - if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
@@ -39,12 +49,12 @@ jobs:
       
       - run: yarn test:unit
         
-        
-      # - run: go get -v -t -u
+      - if: steps.go-cache.outputs.cache-hit != 'true'
+        run: go get -v -t -u
       
-      # - run: go build
+      - run: go build
 
-      # - run: go test -v
+      - run: go test -v
 
       # - run: ./test-githubaction&
 
