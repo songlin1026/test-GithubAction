@@ -61,8 +61,6 @@ jobs:
       - if: steps.go-cache.outputs.cache-hit != 'true'
         run: go get -v -t -u
 
-      # - run: go get -v -t -u
-
       - run: go build
 
       - run: go test -v
@@ -71,12 +69,12 @@ jobs:
 
       - run: yarn cypress run -e host=http://127.0.0.1:3001 --config video=false
 
-      # - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
+      - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
 
-      # - run: docker save testgithubaction:latest -o testgithubaction.tar
+      - run: docker save testgithubaction:latest -o testgithubaction.tar
 
-      # - run: gzip testgithubaction.tar
+      - run: gzip testgithubaction.tar
 
-      # - uses: actions/upload-artifact@v2
-      #   with:
-      #     path: testgithubaction.tar.gz
+      - uses: actions/upload-artifact@v2
+        with:
+          path: testgithubaction.tar.gz
