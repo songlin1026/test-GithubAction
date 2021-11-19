@@ -38,7 +38,7 @@ jobs:
         id: yarn-cache
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn2-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
@@ -46,7 +46,7 @@ jobs:
         id: Cypress-cache
         with:
           path: /home/runner/.cache/Cypress
-          key: ${{ runner.os }}-Cypress-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-Cypress2-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
