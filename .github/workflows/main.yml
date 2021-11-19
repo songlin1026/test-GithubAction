@@ -49,7 +49,7 @@ jobs:
 
       - run: go test -v
 
-      - run: docker run -d --name mariadb -e MARIADB_ROOT_PASSWORD=abcd@1234 -p 33306:3306  mariadb:latest
+      - run: docker run -d --name mariadb2 -e MARIADB_ROOT_PASSWORD=abcd@1234 -p 33307:3306  mariadb:latest
 
       - run: docker exec -i mariadb2  mysql -uroot -pabcd@1234 <<< "create database \`soc-schedule\`"
 
