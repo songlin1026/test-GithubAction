@@ -37,6 +37,7 @@ jobs:
         with:
           path: |
             ~/.cache/go-build
+            ~/.cache/Cypress
             ~/go/pkg/mod
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
