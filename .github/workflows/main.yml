@@ -42,7 +42,9 @@ jobs:
       
       - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
 
-      - run: docker save testgithubaction:latest -o testgithubaction.tar | gzip testgithubaction.tar
+      - run: docker save testgithubaction:latest -o testgithubaction.tar 
+      
+      - run: gzip testgithubaction.tar
 
       - uses: actions/upload-artifact@v2
         with:
