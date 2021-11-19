@@ -61,9 +61,7 @@ jobs:
 
       - run: go test -v
 
-      # - run: ./test-githubaction&
-      - run: nohup go run test-githubaction &
-
+      - run: ./test-githubaction&
 
       - run: yarn cypress run -e host=http://127.0.0.1:3001 --config video=false
 
