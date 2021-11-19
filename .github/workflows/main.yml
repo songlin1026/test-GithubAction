@@ -37,9 +37,9 @@ jobs:
       - run: go test -v
 
       - run: |
-        nohup go run test-githubaction &
-        sleep 2 &&
-        yarn cypress run -e host=http://127.0.0.1:3001 --config video=false
+          nohup go run test-githubaction &
+          sleep 2 &&
+          yarn cypress run -e host=http://127.0.0.1:3001 --config video=false
       
       # - run: docker build --pull --rm -f "Dockerfile" -t testgithubaction:latest "."
 
