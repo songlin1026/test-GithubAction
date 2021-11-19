@@ -33,14 +33,14 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - uses: actions/cache@v2
-          with:
-          id: go-cache
-            path: |
-              ~/.cache/go-build
-              ~/go/pkg/mod
-            key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-            restore-keys: |
-              ${{ runner.os }}-go-
+        with:
+        id: go-cache
+          path: |
+            ~/.cache/go-build
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
         
       - if: steps.yarn-cache.outputs.cache-hit != 'true'
         run: yarn install
