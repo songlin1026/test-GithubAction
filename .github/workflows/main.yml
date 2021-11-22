@@ -55,13 +55,14 @@ jobs:
       #     docker exec -i mariadb2  mysql -uroot -pabcd@1234 <<< "create database \`soc-schedule\`"
       #     docker exec -i mariadb2  mysql -uroot -pabcd@1234 <<< "CREATE TABLE \`soc-schedule\`.\`employee\` (\`id\` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,\`created_at\` DATETIME(3) NULL DEFAULT NULL,\`updated_at\` DATETIME(3) NULL DEFAULT NULL,\`deleted_at\` DATETIME(3) NULL DEFAULT NULL,\`no\` VARCHAR(2) NULL DEFAULT NULL COMMENT '人員編號' COLLATE 'utf8mb4_general_ci',\`name\` LONGTEXT NULL DEFAULT NULL COMMENT '人員姓名' COLLATE 'utf8mb4_general_ci',\`password\` LONGTEXT NULL DEFAULT NULL COMMENT '人員密碼' COLLATE 'utf8mb4_general_ci',\`is_admin\` TINYINT(1) NULL DEFAULT '0' COMMENT '是否為管理者',\`status\` TINYINT(3) UNSIGNED NULL DEFAULT '1' COMMENT '人員狀態 0啟用 1停用',PRIMARY KEY (\`id\`),INDEX \`欄位 4\` (\`deleted_at\`),UNIQUE INDEX \`欄位 5\` (\`no\`))COLLATE='utf8mb4_general_ci';"
       #     docker exec -i mariadb2  mysql -u root -p abcd@1234 <<< "CREATE TABLE \`soc-schedule\`.\`schedule\` (\`id\` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,\`created_at\` DATETIME(3) NULL DEFAULT NULL,\`updated_at\` DATETIME(3) NULL DEFAULT NULL,\`deleted_at\` DATETIME(3) NULL DEFAULT NULL,\`date\` DATETIME(3) NULL DEFAULT NULL COMMENT '日期',\`day_employee_id\` BIGINT(20) UNSIGNED NULL DEFAULT NULL COMMENT '日班人員主鍵',\`day_on_duty\` DATETIME(3) NULL DEFAULT NULL COMMENT '日班簽到',\`day_off_duty\` DATETIME(3) NULL DEFAULT NULL COMMENT '日班簽退',\`night_employee_id\` BIGINT(20) UNSIGNED NULL DEFAULT NULL COMMENT '小夜人員主鍵',\`night_on_duty\` DATETIME(3) NULL DEFAULT NULL COMMENT '小夜簽到',\`night_off_duty\` DATETIME(3) NULL DEFAULT NULL COMMENT '小夜簽退',\`graveyard_employee_id\` BIGINT(20) UNSIGNED NULL DEFAULT NULL COMMENT '大夜人員主鍵',\`graveyard_on_duty\` DATETIME(3) NULL DEFAULT NULL COMMENT '大夜簽到',\`graveyard_off_duty\` DATETIME(3) NULL DEFAULT NULL COMMENT '大夜簽退',PRIMARY KEY (\`id\`),INDEX \`deleted_at\` (\`deleted_at\`),UNIQUE INDEX \`date\` (\`date\`))COLLATE='utf8mb4_general_ci';"
+      
+      - run: docker build -t local < .devcontainer/Dockerfile
 
-
-      - run: |
-          uses: 'docker'
-          image: 'Dockerfile'
-          args:
-            - ${{ inputs.who-to-greet }}
+      # - run: |
+      #     uses: 'docker'
+      #     image: 'Dockerfile'
+      #     args:
+      #       - ${{ inputs.who-to-greet }}
       - run: ./test-githubaction&
 
       - run: yarn cypress run -e host=http://127.0.0.1:3001 --config video=false
