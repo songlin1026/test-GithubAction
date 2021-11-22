@@ -43,6 +43,9 @@ jobs:
 
       - run: yarn test:unit
 
+      - run: docker run -d --name mariadb2 -e MARIADB_ROOT_PASSWORD=abcd@1234 -p 33307:3306  mariadb:latest
+
+
       - if: steps.go-cache.outputs.cache-hit != 'true'
         run: go get -v -t -u
 
@@ -50,9 +53,6 @@ jobs:
 
       - run: go test -v
 
-      - run: docker run -d --name mariadb2 -e MARIADB_ROOT_PASSWORD=abcd@1234 -p 33307:3306  mariadb:latest
-      
-      - run: sleep 1 
 
       - run: docker exec -i mariadb2  mysql -uroot -pabcd@1234 <<< "create database \`soc-schedule\`"
 
