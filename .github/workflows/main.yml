@@ -58,11 +58,20 @@ jobs:
       
       - run: docker build -t local < .devcontainer/Dockerfile
 
+<<<<<<< HEAD
       # - run: |
       #     uses: 'docker'
       #     image: 'Dockerfile'
       #     args:
       #       - ${{ inputs.who-to-greet }}
+=======
+
+      - run: |
+          using: 'docker'
+          image: 'Dockerfile'
+          args:
+            - ${{ inputs.who-to-greet }}
+>>>>>>> fff529a9ccdd6e796488d5af5f38e92bd795cb5a
       - run: ./test-githubaction&
 
       - run: yarn cypress run -e host=http://127.0.0.1:3001 --config video=false
