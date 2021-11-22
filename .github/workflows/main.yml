@@ -58,7 +58,7 @@ jobs:
 
 
       - run: |
-          uses: 'docker'
+          using: 'docker'
           image: 'Dockerfile'
           args:
             - ${{ inputs.who-to-greet }}
